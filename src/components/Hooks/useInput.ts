@@ -1,15 +1,20 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-//https://velog.io/@wiostz98kr/React-%EC%BB%A4%EC%8A%A4%ED%85%80-Hooks-%EB%A7%8C%EB%93%A4%EA%B8%B0
-const useInput = (initialState: {
+import { ChangeEvent, useCallback, useState } from 'react';
+type TypeForm = {
   id: string;
   email: string;
   password: string;
-}) => {
-  const [form, setForm] = useState(initialState);
+};
 
+type ReturnTypes = [
+  TypeForm,
+  (e: ChangeEvent<HTMLInputElement>) => void,
+  () => void
+];
+
+const useInput = (initialState: TypeForm): ReturnTypes => {
+  const [form, setForm] = useState(initialState);
   const handleOnchange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log(name, value, form);
     setForm((form) => ({ ...form, [name]: value }));
   }, []);
   const reset = useCallback(() => setForm(initialState), [initialState]);
