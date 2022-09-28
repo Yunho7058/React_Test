@@ -72,10 +72,6 @@ const Map = () => {
     });
   }, []);
 
-  useEffect(() => {
-    return setFilteredAllPost(filterPost(dumy));
-  }, [currentBoundLocation]);
-
   // 화면 영역 안에 존재하는 마커 필터링하는 함수
   const filterPost = (list: TypeDumy[]) => {
     return list.filter((post) => {
@@ -88,12 +84,16 @@ const Map = () => {
     });
   };
 
+  useEffect(() => {
+    setFilteredAllPost(filterPost(dumy));
+  }, [currentBoundLocation]);
   return (
     <div>
       <div style={{ width: '100vw', height: '500px' }}>
         <div id="map" style={{ width: '100%', height: '100%' }}></div>
       </div>
       <div>
+        <div style={{ fontSize: '20px' }}>현제 보이는 위치</div>
         {filteredAllPost.map((el) => (
           <div key={el.address}>{el.address}</div>
         ))}
