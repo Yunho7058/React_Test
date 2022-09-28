@@ -1,6 +1,5 @@
-import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { test123 } from '../../page/Redux';
 
 export interface TypePostsData {
   status: string;
@@ -38,9 +37,8 @@ export interface TypePosts {
 const asyncThunk = createAsyncThunk(
   //타입과 명칭
   'itemsSlice/asyncThunk',
-  async (test222, test1234) => {
-    console.log(test222);
-
+  async (id: string) => {
+    console.log('데이타 보낼때 인자로 담기', id);
     const post = await axios.get('https://mylifebucketlist.shop/api/post', {
       headers: { 'Content-Type': 'application/json' },
     });

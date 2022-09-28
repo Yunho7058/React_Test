@@ -1,16 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { TypeItem, addCount, removeCount } from '../redux/slice/item';
-import { TypePostsData, asyncThunk } from '../redux/slice/thunkTest';
+import { addCount, removeCount } from '../redux/slice/item';
+import { asyncThunk } from '../redux/slice/thunkTest';
 import { AppDispatch, RootState } from '../redux/store';
 
-export const test123 = '5';
-
 function ReduxTest() {
-  const itemState = useSelector<RootState, TypeItem[]>((state) => state.items);
-  const postState = useSelector<RootState, TypePostsData>(
-    (state) => state.thunkTest
-  );
+  const itemState = useSelector((state: RootState) => state.items);
+  const postState = useSelector((state: RootState) => state.thunkTest);
   const dispatch: AppDispatch = useDispatch();
   console.log(itemState, 'dd');
   return (
@@ -19,7 +15,7 @@ function ReduxTest() {
         <div>결과: {postState.status}</div>
         <button
           onClick={() => {
-            dispatch(asyncThunk()).then((res) => {});
+            dispatch(asyncThunk('id:3'));
           }}
         >
           요청보내기
