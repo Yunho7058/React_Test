@@ -35,7 +35,7 @@ function ReduxTest() {
           <TdBox>수량</TdBox>
           <TdBox>기능</TdBox>
         </TrBox>
-        {itemState.map((el) => {
+        {itemState.dumyData.map((el) => {
           return (
             <TrBox key={el.id}>
               <TdBox>{el.id}</TdBox>

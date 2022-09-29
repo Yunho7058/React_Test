@@ -4,7 +4,7 @@ import useInput from '../components/Hooks/useInput';
 const Box = styled.section`
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 100%;
   row-gap: 10px;
 `;
 
@@ -15,7 +15,6 @@ const HooksTest = () => {
     password: '',
   });
   const handleClick = () => {
-    console.log(form);
     reset();
   };
 
