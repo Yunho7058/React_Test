@@ -3,6 +3,12 @@ declare global {
     kakao: any;
   }
 }
-namespace TypeList {}
+namespace TypeList {
+  export interface TypeItem {
+    id: number;
+    name: string;
+    count: number;
+  }
+}
 
 export default TypeList;
