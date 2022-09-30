@@ -1,4 +1,7 @@
+import { memo, useMemo, useState } from 'react';
+import { useMatch } from 'react-router';
 import styled from 'styled-components';
+import { removeItem } from '../redux/slice/item';
 import Button from './Global/Button';
 import useHooks from './Hooks/useHooks';
 
@@ -22,23 +25,37 @@ const Content = styled.div`
   line-height: 50px;
 `;
 
-const ItemList = () => {
-  const itemState = useHooks().state.items.dumyData;
-  const handleRemove = () => {};
-  const count = 2;
+const ItemList = memo(() => {
+  const { state, dispatch } = useHooks();
+  const itemState = state.items.dumyData;
+  const handleRemove = (id: number) => {
+    dispatch(removeItem(id));
+  };
+  const itemCountZero = () => {
+    console.log('품절수량');
+    return itemState.filter((el) => Number(el.count) === 0).length;
+  };
+  const zeroCount = useMemo(() => itemCountZero(), [itemState]);
   // useMomo 함수를 만들어 품절된 수량 확인하는 함수 만들기
+  const [testInput, setTestInput] = useState('');
+  const handelTest = (e: any) => {
+    setTestInput(e.target.value);
+    console.log(e.target.value);
+  };
   return (
     <Back>
+      <input type="text" defaultValue={testInput} onChange={handelTest}></input>
       {itemState.map((el) => (
         <Box key={el.id}>
           <Content>{el.name}</Content>
           <Content>{el.count}</Content>
-          <Button handle={handleRemove} name="삭제" />
+          <Button handle={handleRemove} name="삭제" id={el.id} />
         </Box>
       ))}
-      <div>품절된 수량 : {count}</div>
+      <div>품절된 수량 : {zeroCount}</div>
+      <div>총 수량 : {itemState.length}</div>
     </Back>
   );
-};
+});
 
 export default ItemList;

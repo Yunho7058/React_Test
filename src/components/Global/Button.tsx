@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 const Back = styled.button`
   all: unset;
@@ -14,22 +15,26 @@ const Back = styled.button`
   }
 `;
 
-const Button = ({
-  name,
-  handle,
-}: {
-  name: string;
-  handle: (route: string) => void;
-}) => {
-  return (
-    <Back
-      onClick={() => {
-        handle(`${name}`);
-      }}
-    >
-      {name}
-    </Back>
-  );
-};
+const Button = memo(
+  ({
+    name,
+    handle,
+    id,
+  }: {
+    name: string;
+    handle: (x: any) => void;
+    id?: number;
+  }) => {
+    return (
+      <Back
+        onClick={() => {
+          handle(id ? id : name);
+        }}
+      >
+        {name}
+      </Back>
+    );
+  }
+);
 
 export default Button;
