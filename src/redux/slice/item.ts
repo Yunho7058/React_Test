@@ -31,9 +31,14 @@ export const item = createSlice({
       state.dumyData.push({ id, name, count });
     },
     removeItem(state, action) {
-      const { id } = action.payload;
-      state.dumyData.filter((el) => el.id !== id);
+      const id = action.payload;
+      state.dumyData = state.dumyData.filter((el) => el.id !== id);
     },
+    // addInputItem(state, action) {
+    //   const { name, count } = action.payload;
+    //   state.itemInput.name = name;
+    //   state.itemInput.count = count;
+    // },
   },
 });
 
