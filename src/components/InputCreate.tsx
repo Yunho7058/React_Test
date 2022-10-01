@@ -1,6 +1,5 @@
-import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
-import useHooks from './Hooks/useHooks';
+
 const Back = styled.div`
   display: flex;
   flex-direction: column;
