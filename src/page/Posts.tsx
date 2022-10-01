@@ -12,10 +12,14 @@ const Back = styled.div`
 `;
 
 const Posts = () => {
-  const { state, dispatch } = useHooks();
+  const { dispatch } = useHooks();
   const [inputValue, setInputValue] = useState({ name: '', count: '' });
   const handleCreate = () => {
-    dispatch(addItem({ name: inputValue.name, count: inputValue.count }));
+    if (inputValue.count && inputValue.name) {
+      dispatch(
+        addItem({ name: inputValue.name, count: Number(inputValue.count) })
+      );
+    }
   };
   return (
     <Back>

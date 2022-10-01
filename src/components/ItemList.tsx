@@ -1,5 +1,4 @@
-import { memo, useMemo, useState } from 'react';
-import { useMatch } from 'react-router';
+import { memo, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { removeItem } from '../redux/slice/item';
 import Button from './Global/Button';
@@ -31,11 +30,11 @@ const ItemList = memo(() => {
   const handleRemove = (id: number) => {
     dispatch(removeItem(id));
   };
-  const itemCountZero = () => {
+  const itemCountZero = useCallback(() => {
     console.log('품절수량');
     return itemState.filter((el) => Number(el.count) === 0).length;
-  };
-  const zeroCount = useMemo(() => itemCountZero(), [itemState]);
+  }, [itemState]);
+  const zeroCount = useMemo(() => itemCountZero(), [itemCountZero]);
   // useMomo 함수를 만들어 품절된 수량 확인하는 함수 만들기
   const [testInput, setTestInput] = useState('');
   const handelTest = (e: any) => {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { dumy } from '../components/dumy';
 const { kakao } = window;
 
@@ -73,20 +73,21 @@ const Map = () => {
   }, []);
 
   // 화면 영역 안에 존재하는 마커 필터링하는 함수
-  const filterPost = (list: TypeDumy[]) => {
-    return list.filter((post) => {
-      return (
-        post.latitude >= currentBoundLocation[0] && //서
-        post.latitude <= currentBoundLocation[2] && //동
-        post.longitude >= currentBoundLocation[1] && //남
-        post.longitude <= currentBoundLocation[3] //북
-      );
-    });
-  };
+  const filterPost = useCallback(
+    (list: TypeDumy[]) => {
+      return list.filter((post) => {
+        return (
+          post.latitude >= currentBoundLocation[0] && //서
+          post.latitude <= currentBoundLocation[2] && //동
+          post.longitude >= currentBoundLocation[1] && //남
+          post.longitude <= currentBoundLocation[3] //북
+        );
+      });
+    },
+    [currentBoundLocation]
+  );
+  useMemo(() => setFilteredAllPost(filterPost(dumy)), [filterPost]);
 
-  useEffect(() => {
-    setFilteredAllPost(filterPost(dumy));
-  }, [currentBoundLocation]);
   return (
     <div>
       <div style={{ width: '100vw', height: '500px' }}>
