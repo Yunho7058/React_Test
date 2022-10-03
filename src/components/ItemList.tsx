@@ -26,8 +26,8 @@ const Content = styled.div`
 
 const ItemList = memo(() => {
   const { state, dispatch } = useHooks();
-  const itemState = state.items.dumyData;
-  const handleRemove = (id: number) => {
+  const itemState = state.items.dumyItems;
+  const handleRemove = ({ id }: { id?: number }) => {
     dispatch(removeItem(id));
   };
   const itemCountZero = useCallback(() => {

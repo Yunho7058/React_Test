@@ -2,12 +2,15 @@ import Router from './Router';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import GlobalStyle from './components/Global/GlobalStyle';
+import { RecoilRoot } from 'recoil';
 
 function App() {
   return (
     <Provider store={store}>
-      <GlobalStyle />
-      <Router />
+      <RecoilRoot>
+        <GlobalStyle />
+        <Router />
+      </RecoilRoot>
     </Provider>
   );
 }

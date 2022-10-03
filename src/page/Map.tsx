@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { dumy } from '../components/dumy';
+import { dumy } from '../components/dumyMap';
 const { kakao } = window;
 
 const Map = () => {

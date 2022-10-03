@@ -3,16 +3,16 @@ import { useNavigate } from 'react-router';
 import Button from '../components/Global/Button';
 const Back = styled.div`
   width: 100vw;
-  height: 100hw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  row-gap: 15px;
 `;
 
 const Main = () => {
   const navigate = useNavigate();
-  const handlePageMove = (route: string) => {
-    navigate(`/${route}`);
+  const handlePageMove = ({ name }: { name?: string }) => {
+    navigate(`/${name}`);
   };
   return (
     <Back>
@@ -20,6 +20,7 @@ const Main = () => {
       <Button handle={handlePageMove} name="reduxTest" />
       <Button handle={handlePageMove} name="hooksTest" />
       <Button handle={handlePageMove} name="posts" />
+      <Button handle={handlePageMove} name="recoilTest" />
     </Back>
   );
 };
