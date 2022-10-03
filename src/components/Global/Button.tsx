@@ -9,9 +9,15 @@ const Back = styled.button`
   width: 80%;
   text-align: center;
   height: 30px;
-  margin-top: 10px;
+  font-size: 17px;
   &:hover {
     background-color: #3287ff;
+  }
+  &.빼기 {
+    background-color: #e074a8;
+    &:hover {
+      background-color: #ee4a99;
+    }
   }
 `;
 
@@ -22,14 +28,15 @@ const Button = memo(
     id,
   }: {
     name: string;
-    handle: (x: any) => void;
+    handle: ({ name, id }: { name?: string; id?: number }) => void;
     id?: number;
   }) => {
     return (
       <Back
         onClick={() => {
-          handle(id ? id : name);
+          handle({ name, id });
         }}
+        className={name}
       >
         {name}
       </Back>

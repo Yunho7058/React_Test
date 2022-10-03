@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import items from './slice/item';
 import thunkTest from './slice/thunkTest';
-import logger from 'redux-logger';
 
 //등록
 const store = configureStore({

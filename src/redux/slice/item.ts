@@ -1,15 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import TypeList from '../../components/Global/typeList';
-
+import { dumyItems } from '../../components/dumyItem';
 let initialState: {
-  dumyData: TypeList.TypeItem[];
+  dumyItems: TypeList.TypeItem[];
   itemInput: TypeList.TypeItem;
 } = {
-  dumyData: [
-    { id: 1, name: '아이폰', count: 1 },
-    { id: 2, name: '갤럭시', count: 3 },
-    { id: 3, name: 'LG', count: 5 },
-  ],
+  dumyItems,
   itemInput: { id: 0, name: '', count: 0 },
 };
 
@@ -19,20 +15,20 @@ export const item = createSlice({
   initialState,
   reducers: {
     addCount(state, action) {
-      state.dumyData[action.payload - 1].count++;
+      state.dumyItems[action.payload - 1].count++;
     },
     removeCount(state, action) {
-      state.dumyData[action.payload - 1].count > 0 &&
-        state.dumyData[action.payload - 1].count--;
+      state.dumyItems[action.payload - 1].count > 0 &&
+        state.dumyItems[action.payload - 1].count--;
     },
     addItem(state, action) {
-      const id = state.dumyData[state.dumyData.length - 1].id + 1;
+      const id = state.dumyItems[state.dumyItems.length - 1].id + 1;
       const { name, count } = action.payload;
-      state.dumyData.push({ id, name, count });
+      state.dumyItems.push({ id, name, count });
     },
     removeItem(state, action) {
       const id = action.payload;
-      state.dumyData = state.dumyData.filter((el) => el.id !== id);
+      state.dumyItems = state.dumyItems.filter((el) => el.id !== id);
     },
     // addInputItem(state, action) {
     //   const { name, count } = action.payload;

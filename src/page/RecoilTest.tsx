@@ -1,8 +1,7 @@
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import Button from '../components/Global/Button';
-import useHooks from '../components/Hooks/useHooks';
-import { addCount, removeCount } from '../redux/slice/item';
-import { asyncThunk } from '../redux/slice/thunkTest';
+import { todoItems } from '../recoil/todo';
 
 const List = styled.section`
   padding: 10px;
@@ -31,13 +30,14 @@ const Title = styled.title`
   }
 `;
 
-const ReduxTest = () => {
-  const { dispatch, state } = useHooks();
-  const itemState = state.items.dumyItems;
-  const postState = state.thunkTest;
-
+const RecoilTest = () => {
+  const [items, setitems] = useRecoilState(todoItems);
   const handleCounterClick = ({ name, id }: { name?: string; id?: number }) => {
-    name === '추가' ? dispatch(addCount(id)) : dispatch(removeCount(id));
+    const PM = name === '추가' ? 1 : -1;
+    const data = items.map((el) =>
+      el.id === id ? { ...el, count: el.count + PM } : { ...el }
+    );
+    setitems(data);
   };
 
   return (
@@ -47,7 +47,7 @@ const ReduxTest = () => {
         <div>상품명</div>
         <div>수량</div>
       </Title>
-      {itemState.map((el) => (
+      {items.map((el) => (
         <Box key={el.id}>
           <div>{el.id}</div>
           <div>{el.name}</div>
@@ -58,26 +58,8 @@ const ReduxTest = () => {
           </div>
         </Box>
       ))}
-
-      <div>
-        <div>결과: {postState.status}</div>
-        <button
-          onClick={() => {
-            dispatch(asyncThunk('id:3'));
-          }}
-        >
-          요청보내기
-        </button>
-        {postState.status === 'complete' ? (
-          <div>
-            {postState.post.map((el) => {
-              return <div key={el.id}>{el.nickname}</div>;
-            })}
-          </div>
-        ) : null}
-      </div>
     </List>
   );
 };
 
-export default ReduxTest;
+export default RecoilTest;
