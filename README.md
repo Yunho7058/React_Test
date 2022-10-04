@@ -2,8 +2,9 @@
 
 ### 구현 목록
 1. Kakao Map 구현
-2. Redux-Toolkit 구현
+2. Redux-Toolkit 연습
 3. Hooks custom 
+4. Recoil 연습
 
 ### 배포서버
 https://yunho7058-test.netlify.app
