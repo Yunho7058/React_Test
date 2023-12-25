@@ -21,6 +21,7 @@ const Main = () => {
       <Button handle={handlePageMove} name="hooksTest" />
       <Button handle={handlePageMove} name="posts" />
       <Button handle={handlePageMove} name="recoilTest" />
+      <Button handle={handlePageMove} name="axiosTest" />
     </Back>
   );
 };

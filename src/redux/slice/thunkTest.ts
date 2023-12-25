@@ -11,13 +11,17 @@ const asyncThunk = createAsyncThunk(
   //타입과 명칭
   'itemsSlice/asyncThunk',
   async (id: string) => {
-    const post = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts/${id}`,
-      {
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
-    return post.data;
+    if (id === '') {
+      return null;
+    } else {
+      const post = await axios.get(
+        `https://jsonplaceholder.typicode.com/posts/${id}`,
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+      return post.data;
+    }
     //! 해결 방법 type 2개로 나눠서 관리 server로 받은 데이타도 나눠서 리턴함
   }
 );
@@ -36,8 +40,13 @@ export const thunkTest = createSlice({
     });
     //요청 성공
     builder.addCase(asyncThunk.fulfilled, (state, action) => {
-      state.status = 'complete';
-      state.data = [action.payload];
+      console.log(action.payload);
+      if (action.payload) {
+        state.data = [action.payload];
+        state.status = 'complete';
+      } else {
+        state.status = 'client fail';
+      }
     });
     //요청 실패
     builder.addCase(asyncThunk.rejected, (state, action) => {

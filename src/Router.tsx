@@ -6,6 +6,7 @@ import ReduxTest from './page/Redux';
 import HooksTest from './page/HooksTest';
 import Posts from './page/Posts';
 import RecoilTest from './page/RecoilTest';
+import AxiosTest from './page/AxiosTest';
 //const Review = lazy(() => import('./page/Review'));
 
 const Router = () => {
@@ -19,6 +20,7 @@ const Router = () => {
           <Route path="/hooksTest" element={<HooksTest />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/recoilTest" element={<RecoilTest />} />
+          <Route path="/axiosTest" element={<AxiosTest />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

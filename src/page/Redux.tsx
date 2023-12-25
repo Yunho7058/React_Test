@@ -46,7 +46,6 @@ const ReduxTest = () => {
   const [form, handleOnchange] = useInput({
     id: '',
   });
-  console.log(form);
   return (
     <List>
       <Title>
@@ -65,6 +64,7 @@ const ReduxTest = () => {
           </div>
         </Box>
       ))}
+      <div>AsyncThunk Test</div>
       <div>결과: {postState.status}</div>
       <input
         type="number"
