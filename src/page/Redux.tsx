@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 import Button from '../components/Global/Button';
 import useHooks from '../components/Hooks/useHooks';
+import useInput from '../components/Hooks/useInput';
 import { addCount, removeCount } from '../redux/slice/item';
 import { asyncThunk } from '../redux/slice/thunkTest';
 
 const List = styled.section`
   padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Box = styled.div`
@@ -22,7 +27,6 @@ const Box = styled.div`
 `;
 const Title = styled.title`
   padding: 10px;
-
   width: 400px;
   display: grid;
   grid-template-columns: repeat(4, 100px);
@@ -39,7 +43,9 @@ const ReduxTest = () => {
   const handleCounterClick = ({ name, id }: { name?: string; id?: number }) => {
     name === '추가' ? dispatch(addCount(id)) : dispatch(removeCount(id));
   };
-
+  const [form, handleOnchange] = useInput({
+    id: '',
+  });
   return (
     <List>
       <Title>
@@ -58,24 +64,32 @@ const ReduxTest = () => {
           </div>
         </Box>
       ))}
-
-      <div>
-        <div>결과: {postState.status}</div>
-        <button
-          onClick={() => {
-            dispatch(asyncThunk('id:3'));
-          }}
-        >
-          요청보내기
-        </button>
-        {postState.status === 'complete' ? (
-          <div>
-            {postState.post.map((el) => {
-              return <div key={el.id}>{el.nickname}</div>;
-            })}
-          </div>
-        ) : null}
-      </div>
+      <div>AsyncThunk Test</div>
+      <div>결과: {postState.status}</div>
+      <input
+        type="number"
+        value={form.id}
+        onChange={handleOnchange}
+        name="id"
+        maxLength={3}
+      />
+      <button
+        onClick={() => {
+          dispatch(asyncThunk(form.id));
+        }}
+      >
+        요청보내기
+      </button>
+      {postState.status === 'complete' ? (
+        <div>
+          <div>아이디 : {postState.data[0].id}</div>
+          <div>제목 : {postState.data[0].title}</div>
+          <div>내용 : {postState.data[0].body}</div>
+          <div>유저 : {postState.data[0].userId}</div>
+        </div>
+      ) : postState.status === 'Loading' ? (
+        <div>로딩중</div>
+      ) : null}
     </List>
   );
 };
