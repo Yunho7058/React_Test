@@ -14,6 +14,7 @@ const Main = () => {
   const handlePageMove = ({ name }: { name?: string }) => {
     navigate(`/${name}`);
   };
+
   return (
     <Back>
       <Button handle={handlePageMove} name="map" />
