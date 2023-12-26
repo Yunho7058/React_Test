@@ -9,6 +9,7 @@ const Box = styled.section`
 `;
 
 const HooksTest = () => {
+  //useInput 사용 -> 속성인 form,hanle,reset 사용
   const [form, handleOnchange, reset] = useInput({
     id: '',
     email: '',
