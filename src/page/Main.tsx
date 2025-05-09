@@ -28,3 +28,35 @@ const Main = () => {
 };
 
 export default Main;
+
+
+/*
+       );
+      })
+      .catch((err) => {
+        console.log(err, 'bookmark get err');
+      });
+  }, []);
+  const [nicknameChange, setNicknameChange] = useState({
+    is: false,
+    isNickNameCheck: false,
+    nickname: '',
+  });
+  const handleNicknameInput =
+    (key: string) => (e: { target: HTMLInputElement }) => {
+      setNicknameChange({ ...nicknameChange, [key]: e.target.value });
+    };
+  const handleNicknameEdit = () => {
+    if (nicknameChange.nickname.length < 1) {
+      dispatch(modalOpen('닉네임을 입력해주세요.'));
+    } else {
+      axiosInstance
+        .post(`/nickname`, {
+          nickname: nicknameChange.nickname,
+        })
+        .then((res) => {
+          setNicknameChange({ ...nicknameChange, isNickNameCheck: true });
+        })
+        .catch((err) => {
+
+*/
